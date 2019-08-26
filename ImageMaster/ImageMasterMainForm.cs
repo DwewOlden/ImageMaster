@@ -12,9 +12,22 @@ namespace ImageMaster
 {
     public partial class ImageMasterMainForm : Form
     {
+        private string selectedDirectory;
+
         public ImageMasterMainForm()
         {
             InitializeComponent();
+        }
+
+        private void BtnCameraPath_Click(object sender, EventArgs e)
+        {
+            var outcome = cameraPathFileDialog.ShowDialog();
+
+            if (outcome == DialogResult.OK)
+            {
+                selectedDirectory = cameraPathFileDialog.SelectedPath;
+                txtCameraPath.Text = selectedDirectory;
+            }
         }
     }
 }
