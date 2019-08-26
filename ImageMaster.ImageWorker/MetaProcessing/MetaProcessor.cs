@@ -25,7 +25,22 @@ namespace ImageMaster.ImageWorker.MetaProcessing
             ImagePath = GetImagePaths(path);
             Images = ImagePath.Count();
 
+            size = GetAverageSize(ImagePath);
+
             return true;
+        }
+
+        private Size GetAverageSize(IEnumerable<string> imagePath)
+        {
+            Size size = new Size();
+
+            foreach (string path in imagePath)
+            {
+
+            }
+
+
+            return size;
         }
 
         /// <summary>
