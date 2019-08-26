@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageMaster.ImageWorker.MetaProcessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,9 @@ namespace ImageMaster
 {
     public partial class ImageMasterMainForm : Form
     {
+
+        private MetaProcessor metaProcessor;
+
         private string selectedDirectory;
 
         private int numberOfImages;
@@ -21,6 +25,7 @@ namespace ImageMaster
         public ImageMasterMainForm()
         {
             InitializeComponent();
+            metaProcessor = new MetaProcessor();
         }
 
         private void BtnCameraPath_Click(object sender, EventArgs e)
@@ -31,7 +36,20 @@ namespace ImageMaster
             {
                 selectedDirectory = cameraPathFileDialog.SelectedPath;
                 txtCameraPath.Text = selectedDirectory;
+
+                IEnumerable<string> paths = new List<string>().AsEnumerable();
+                bool wasProcessed = metaProcessor.ScanDirectory(selectedDirectory, ref paths, ref numberOfImages, ref typicalSize);
+
+                if (!wasProcessed)
+                { 
+                    MessageBox.Show("There was an issue processing that directory or its contents","Danger Will Robinson", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                lblImages.Text = metaProcessor.GetImageCountText(numberOfImages);
+                lblSize.Text = metaProcessor.GetTypicalSizeText(typicalSize);
             }
+
         }
     }
 }

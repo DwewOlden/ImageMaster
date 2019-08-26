@@ -85,5 +85,11 @@
   <ItemGroup>
     <Content Include="MainIcons.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageMaster.ImageWorker\ImageMaster.ImageWorker.csproj">
+      <Project>{E6D91F9F-16FD-4F12-A07C-F13EF290ED31}</Project>
+      <Name>ImageMaster.ImageWorker</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

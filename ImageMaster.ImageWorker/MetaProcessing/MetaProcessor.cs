@@ -26,6 +26,7 @@ namespace ImageMaster.ImageWorker.MetaProcessing
             Images = ImagePath.Count();
 
             size = GetAverageSize(ImagePath);
+            
 
             return true;
         }
@@ -36,11 +37,40 @@ namespace ImageMaster.ImageWorker.MetaProcessing
 
             foreach (string path in imagePath)
             {
-
+                Size imageSize = GetImageSize(path);
+                size = size + imageSize;
             }
 
+            size.Height = size.Height / imagePath.Count();
+            size.Width = size.Width / imagePath.Count();
 
             return size;
+        }
+
+        private Size GetImageSize(string path)
+        {
+            Bitmap b = new Bitmap(path);
+            Size s = new Size();
+
+
+            if (b.Size.Height >= b.Size.Width)
+                s = new Size(b.Width, b.Height);
+            else
+                s = new Size(b.Height, b.Width);
+
+            b.Dispose();
+
+            return s;
+        }
+
+        public string GetImageCountText(int numberOfImages)
+        {
+            return string.Format("Number Of Images: {0}", numberOfImages);
+        }
+
+        public string GetTypicalSizeText(Size size)
+        {
+            return string.Format("Typical Size: {0}W x{1}H", size.Width, size.Height);
         }
 
         /// <summary>
