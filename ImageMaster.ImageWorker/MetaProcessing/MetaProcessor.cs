@@ -17,16 +17,13 @@ namespace ImageMaster.ImageWorker.MetaProcessing
         private const string extension = "*.JPG";
 
 
-        public bool ScanDirectory(string path,ref List<string> ImagePath,ref int Images,ref Size size)
+        public bool ScanDirectory(string path,ref IEnumerable<string> ImagePath,ref int Images,ref Size size)
         {
             if (!System.IO.Directory.Exists(path))
                 return false;
 
-            List<string> imagePaths = GetImagePaths(path);
-
-
-
-            
+            ImagePath = GetImagePaths(path);
+            Images = ImagePath.Count();
 
             return true;
         }
@@ -36,9 +33,17 @@ namespace ImageMaster.ImageWorker.MetaProcessing
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private List<string> GetImagePaths(string path)
+        private IEnumerable<string> GetImagePaths(string path)
         {
-            throw new NotImplementedException();
+            System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(path);
+            var files = dirInfo.EnumerateFiles(extension,System.IO.SearchOption.AllDirectories);
+
+            List<string> fileNames = new List<string>();
+            foreach (var file in files)
+                fileNames.Add(file.FullName);
+
+            return fileNames;
+
         }
     }
 }
