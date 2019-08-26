@@ -14,6 +14,10 @@ namespace ImageMaster
     {
         private string selectedDirectory;
 
+        private int numberOfImages;
+
+        private Size typicalSize;
+
         public ImageMasterMainForm()
         {
             InitializeComponent();
