@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace ImageMaster.ImageWorker.MetaProcessing
 {
     /// <summary>
-    /// A 
+    /// A class that will gather a list of images in the path and produce some information for the 
+    /// user interface
     /// </summary>
     public class MetaProcessor
     {
@@ -16,6 +17,7 @@ namespace ImageMaster.ImageWorker.MetaProcessing
         {
             if (!System.IO.Directory.Exists(path))
                 return false;
+
 
             return true;
         }
