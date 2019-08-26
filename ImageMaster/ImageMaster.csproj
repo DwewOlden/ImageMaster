@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\BaseProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseProgressForm.Designer.cs">
+      <DependentUpon>BaseProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageMasterMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +63,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BaseProgressForm.resx">
+      <DependentUpon>BaseProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageMasterMainForm.resx">
       <DependentUpon>ImageMasterMainForm.cs</DependentUpon>
     </EmbeddedResource>
