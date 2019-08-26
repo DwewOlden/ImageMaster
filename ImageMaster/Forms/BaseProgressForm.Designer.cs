@@ -46,6 +46,7 @@
             this.progressBar1.Location = new System.Drawing.Point(15, 34);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(462, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 1;
             // 
             // BaseProgressForm
@@ -57,6 +58,7 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.Name = "BaseProgressForm";
+            this.ShowInTaskbar = false;
             this.Text = "Base Progress Form";
             this.ResumeLayout(false);
             this.PerformLayout();

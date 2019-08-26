@@ -1,4 +1,5 @@
-﻿using ImageMaster.ImageWorker.MetaProcessing;
+﻿using ImageMaster.Forms;
+using ImageMaster.ImageWorker.MetaProcessing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,14 @@ namespace ImageMaster
     {
 
         private MetaProcessor metaProcessor;
+        private BaseProgressForm baseProgres;
+
+        private IEnumerable<string> imageFilePaths;
 
         private string selectedDirectory;
-
         private int numberOfImages;
-
         private Size typicalSize;
+        private bool metaWasProcessed;
 
         public ImageMasterMainForm()
         {
@@ -34,22 +37,36 @@ namespace ImageMaster
 
             if (outcome == DialogResult.OK)
             {
+
+                baseProgres = new BaseProgressForm();
+                baseProgres.FormText = "Scanning Selected Location For Images...";
                 selectedDirectory = cameraPathFileDialog.SelectedPath;
                 txtCameraPath.Text = selectedDirectory;
 
-                IEnumerable<string> paths = new List<string>().AsEnumerable();
-                bool wasProcessed = metaProcessor.ScanDirectory(selectedDirectory, ref paths, ref numberOfImages, ref typicalSize);
+                initailScanWorker.RunWorkerAsync();
+                baseProgres.ShowDialog();
 
-                if (!wasProcessed)
-                { 
-                    MessageBox.Show("There was an issue processing that directory or its contents","Danger Will Robinson", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            }
+        }
 
-                lblImages.Text = metaProcessor.GetImageCountText(numberOfImages);
-                lblSize.Text = metaProcessor.GetTypicalSizeText(typicalSize);
+        private void InitailScanWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (baseProgres != null)
+                baseProgres.Close();
+
+            if (!metaWasProcessed)
+            {
+                MessageBox.Show("There was an issue processing that directory or its contents", "Danger Will Robinson", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
+            lblImages.Text = metaProcessor.GetImageCountText(numberOfImages);
+            lblSize.Text = metaProcessor.GetTypicalSizeText(typicalSize);
+        }
+
+        private void InitailScanWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            metaWasProcessed = metaProcessor.ScanDirectory(selectedDirectory, ref imageFilePaths, ref numberOfImages, ref typicalSize);
         }
     }
 }
