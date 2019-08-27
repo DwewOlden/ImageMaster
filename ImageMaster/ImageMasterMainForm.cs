@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace ImageMaster
         private MetaProcessor metaProcessor;
         private BaseProgressForm baseProgres;
 
-        private IEnumerable<string> imageFilePaths;
+        private IEnumerable<FileInfo> imageFilePaths;
 
         private string selectedDirectory;
         private int numberOfImages;
@@ -67,6 +68,31 @@ namespace ImageMaster
         private void InitailScanWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             metaWasProcessed = metaProcessor.ScanDirectory(selectedDirectory, ref imageFilePaths, ref numberOfImages, ref typicalSize);
+        }
+
+        private void CBoxCopyRawImages_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBoxCopyRawImages.Checked)
+            {
+                txtRawPath.Enabled = true;
+                btnRAWPath.Enabled = true;
+            }
+            else
+            {
+                txtRawPath.Enabled = false;
+                btnRAWPath.Enabled = false;
+            }
+        }
+
+        private void BtnJPEGPath_Click(object sender, EventArgs e)
+        {
+            var reponse = jpgPathFileDialog.ShowDialog();
+
+            if (reponse == DialogResult.OK)
+            {
+                string path = jpgPathFileDialog.SelectedPath;
+            }
+         
         }
     }
 }

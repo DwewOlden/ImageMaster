@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace ImageMaster.ImageWorker.MetaProcessing
         private const string extension = "*.JPG";
 
 
-        public bool ScanDirectory(string path,ref IEnumerable<string> ImagePath,ref int Images,ref Size size)
+        public bool ScanDirectory(string path,ref IEnumerable<FileInfo> ImagePath,ref int Images,ref Size size)
         {
             if (!System.IO.Directory.Exists(path))
                 return false;
@@ -31,13 +32,13 @@ namespace ImageMaster.ImageWorker.MetaProcessing
             return true;
         }
 
-        private Size GetAverageSize(IEnumerable<string> imagePath)
+        private Size GetAverageSize(IEnumerable<FileInfo> imagePath)
         {
             Size size = new Size();
 
-            foreach (string path in imagePath)
+            foreach (FileInfo path in imagePath)
             {
-                Size imageSize = GetImageSize(path);
+                Size imageSize = GetImageSize(path.FullName);
                 size = size + imageSize;
             }
 
@@ -63,11 +64,21 @@ namespace ImageMaster.ImageWorker.MetaProcessing
             return s;
         }
 
+        /// <summary>
+        /// Generate a piece of text for the general size of the images
+        /// </summary>
+        /// <param name="numberOfImages"></param>
+        /// <returns></returns>
         public string GetImageCountText(int numberOfImages)
         {
             return string.Format("Number Of Images: {0}", numberOfImages);
         }
 
+        /// <summary>
+        /// Generates a pieces of textfor the general size of the images
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public string GetTypicalSizeText(Size size)
         {
             return string.Format("Typical Size: {0}W x{1}H", size.Width, size.Height);
@@ -78,17 +89,12 @@ namespace ImageMaster.ImageWorker.MetaProcessing
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private IEnumerable<string> GetImagePaths(string path)
+        private IEnumerable<FileInfo> GetImagePaths(string path)
         {
             System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(path);
             var files = dirInfo.EnumerateFiles(extension,System.IO.SearchOption.AllDirectories);
 
-            List<string> fileNames = new List<string>();
-            foreach (var file in files)
-                fileNames.Add(file.FullName);
-
-            return fileNames;
-
+            return files.AsEnumerable();
         }
     }
 }

@@ -38,16 +38,18 @@
             this.lblImages = new System.Windows.Forms.Label();
             this.initailScanWorker = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.lblNewTypicalSize = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnPerformProcessing = new System.Windows.Forms.Button();
-            this.txtJPEGPath = new System.Windows.Forms.TextBox();
-            this.btnJPEGPath = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.cBoxCopyRawImages = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnRAWPath = new System.Windows.Forms.Button();
             this.txtRawPath = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnJPEGPath = new System.Windows.Forms.Button();
+            this.txtJPEGPath = new System.Windows.Forms.TextBox();
+            this.btnPerformProcessing = new System.Windows.Forms.Button();
+            this.jpgPathFileDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -146,6 +148,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Images To Be Scaled To This Percentage Of Original Size";
             // 
+            // lblNewTypicalSize
+            // 
+            this.lblNewTypicalSize.AutoSize = true;
+            this.lblNewTypicalSize.Location = new System.Drawing.Point(21, 94);
+            this.lblNewTypicalSize.Name = "lblNewTypicalSize";
+            this.lblNewTypicalSize.Size = new System.Drawing.Size(119, 17);
+            this.lblNewTypicalSize.TabIndex = 1;
+            this.lblNewTypicalSize.Text = "New Typical Size:";
+            // 
             // trackBar1
             // 
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -157,19 +168,11 @@
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Value = 60;
             // 
-            // lblNewTypicalSize
-            // 
-            this.lblNewTypicalSize.AutoSize = true;
-            this.lblNewTypicalSize.Location = new System.Drawing.Point(21, 94);
-            this.lblNewTypicalSize.Name = "lblNewTypicalSize";
-            this.lblNewTypicalSize.Size = new System.Drawing.Size(119, 17);
-            this.lblNewTypicalSize.TabIndex = 1;
-            this.lblNewTypicalSize.Text = "New Typical Size:";
-            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.cBoxCopyRawImages);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.btnRAWPath);
             this.groupBox4.Controls.Add(this.txtRawPath);
@@ -178,50 +181,21 @@
             this.groupBox4.Controls.Add(this.txtJPEGPath);
             this.groupBox4.Location = new System.Drawing.Point(16, 342);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(881, 127);
+            this.groupBox4.Size = new System.Drawing.Size(881, 137);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Images Will Be Saved To";
             // 
-            // btnPerformProcessing
+            // cBoxCopyRawImages
             // 
-            this.btnPerformProcessing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPerformProcessing.Location = new System.Drawing.Point(692, 475);
-            this.btnPerformProcessing.Name = "btnPerformProcessing";
-            this.btnPerformProcessing.Size = new System.Drawing.Size(205, 23);
-            this.btnPerformProcessing.TabIndex = 4;
-            this.btnPerformProcessing.Text = "Copy and Resize Images";
-            this.btnPerformProcessing.UseVisualStyleBackColor = true;
-            // 
-            // txtJPEGPath
-            // 
-            this.txtJPEGPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtJPEGPath.Location = new System.Drawing.Point(164, 40);
-            this.txtJPEGPath.Name = "txtJPEGPath";
-            this.txtJPEGPath.Size = new System.Drawing.Size(525, 22);
-            this.txtJPEGPath.TabIndex = 0;
-            // 
-            // btnJPEGPath
-            // 
-            this.btnJPEGPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnJPEGPath.Location = new System.Drawing.Point(699, 40);
-            this.btnJPEGPath.Name = "btnJPEGPath";
-            this.btnJPEGPath.Size = new System.Drawing.Size(160, 23);
-            this.btnJPEGPath.TabIndex = 1;
-            this.btnJPEGPath.Text = "Choose Path";
-            this.btnJPEGPath.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "JPEG Saved To:";
+            this.cBoxCopyRawImages.AutoSize = true;
+            this.cBoxCopyRawImages.Location = new System.Drawing.Point(164, 103);
+            this.cBoxCopyRawImages.Name = "cBoxCopyRawImages";
+            this.cBoxCopyRawImages.Size = new System.Drawing.Size(231, 21);
+            this.cBoxCopyRawImages.TabIndex = 6;
+            this.cBoxCopyRawImages.Text = "Copy Raw Images From Camera";
+            this.cBoxCopyRawImages.UseVisualStyleBackColor = true;
+            this.cBoxCopyRawImages.CheckedChanged += new System.EventHandler(this.CBoxCopyRawImages_CheckedChanged);
             // 
             // label2
             // 
@@ -236,6 +210,7 @@
             // 
             this.btnRAWPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRAWPath.Enabled = false;
             this.btnRAWPath.Location = new System.Drawing.Point(699, 75);
             this.btnRAWPath.Name = "btnRAWPath";
             this.btnRAWPath.Size = new System.Drawing.Size(160, 23);
@@ -247,16 +222,58 @@
             // 
             this.txtRawPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtRawPath.Enabled = false;
             this.txtRawPath.Location = new System.Drawing.Point(164, 75);
             this.txtRawPath.Name = "txtRawPath";
             this.txtRawPath.Size = new System.Drawing.Size(525, 22);
             this.txtRawPath.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "JPEG Saved To:";
+            // 
+            // btnJPEGPath
+            // 
+            this.btnJPEGPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnJPEGPath.Location = new System.Drawing.Point(699, 40);
+            this.btnJPEGPath.Name = "btnJPEGPath";
+            this.btnJPEGPath.Size = new System.Drawing.Size(160, 23);
+            this.btnJPEGPath.TabIndex = 1;
+            this.btnJPEGPath.Text = "Choose Path";
+            this.btnJPEGPath.UseVisualStyleBackColor = true;
+            this.btnJPEGPath.Click += new System.EventHandler(this.BtnJPEGPath_Click);
+            // 
+            // txtJPEGPath
+            // 
+            this.txtJPEGPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtJPEGPath.Location = new System.Drawing.Point(164, 40);
+            this.txtJPEGPath.Name = "txtJPEGPath";
+            this.txtJPEGPath.Size = new System.Drawing.Size(525, 22);
+            this.txtJPEGPath.TabIndex = 0;
+            // 
+            // btnPerformProcessing
+            // 
+            this.btnPerformProcessing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPerformProcessing.Location = new System.Drawing.Point(692, 490);
+            this.btnPerformProcessing.Name = "btnPerformProcessing";
+            this.btnPerformProcessing.Size = new System.Drawing.Size(205, 23);
+            this.btnPerformProcessing.TabIndex = 4;
+            this.btnPerformProcessing.Text = "Copy and Resize Images";
+            this.btnPerformProcessing.UseVisualStyleBackColor = true;
+            // 
             // ImageMasterMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 510);
+            this.ClientSize = new System.Drawing.Size(913, 525);
             this.Controls.Add(this.btnPerformProcessing);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -300,6 +317,8 @@
         private System.Windows.Forms.TextBox txtRawPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnJPEGPath;
+        private System.Windows.Forms.CheckBox cBoxCopyRawImages;
+        private System.Windows.Forms.FolderBrowserDialog jpgPathFileDialog;
     }
 }
 
