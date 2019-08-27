@@ -268,6 +268,7 @@
             this.btnPerformProcessing.TabIndex = 4;
             this.btnPerformProcessing.Text = "Copy and Resize Images";
             this.btnPerformProcessing.UseVisualStyleBackColor = true;
+            this.btnPerformProcessing.Click += new System.EventHandler(this.BtnPerformProcessing_Click);
             // 
             // ImageMasterMainForm
             // 

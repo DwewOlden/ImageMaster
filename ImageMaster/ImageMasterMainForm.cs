@@ -22,6 +22,9 @@ namespace ImageMaster
         private IEnumerable<FileInfo> imageFilePaths;
 
         private string selectedDirectory;
+        private string jpegDirectory;
+        private string rawDirectory;
+
         private int numberOfImages;
         private Size typicalSize;
         private bool metaWasProcessed;
@@ -91,8 +94,16 @@ namespace ImageMaster
             if (reponse == DialogResult.OK)
             {
                 string path = jpgPathFileDialog.SelectedPath;
+                txtJPEGPath.Text = path;
+                jpegDirectory = path;
             }
          
+        }
+
+        private void BtnPerformProcessing_Click(object sender, EventArgs e)
+        {
+            FilenameProcessor f = new FilenameProcessor();
+            f.CreateDirectory(jpegDirectory);
         }
     }
 }
