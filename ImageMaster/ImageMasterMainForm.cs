@@ -102,8 +102,9 @@ namespace ImageMaster
 
         private void BtnPerformProcessing_Click(object sender, EventArgs e)
         {
+            string outdir = string.Empty;
             FilenameProcessor f = new FilenameProcessor();
-            f.CreateDirectory(jpegDirectory);
+            f.CreateDirectory(jpegDirectory,out outdir);
         }
     }
 }
